@@ -17,187 +17,102 @@ section below for the architecture, training results, and Docker commands.
 
 A FastAPI application demonstrating bigram text generation and spaCy word embeddings.
 
+## Features
 
+- Generate text using a simple bigram language model.
 
-\## Features
+- Calculate a 300-dimensional embedding for an input word.
 
+- Validate request data with Pydantic.
 
+- Provide interactive API documentation with Swagger UI.
 
-\- Generate text using a simple bigram language model.
+- Run locally or inside a Docker container.
 
-\- Calculate a 300-dimensional embedding for an input word.
-
-\- Validate request data with Pydantic.
-
-\- Provide interactive API documentation with Swagger UI.
-
-\- Run locally or inside a Docker container.
-
-
-
-\## Project Structure
-
-
+## Project Structure
 
 ```text
-
-APAN\_5560genai/
-
+APAN_5560genai/
 ├── app/
-
-│   ├── \_\_init\_\_.py
-
-│   ├── bigram\_model.py
-
-│   ├── embedding\_model.py
-
+│   ├── __init__.py
+│   ├── bigram_model.py
+│   ├── embedding_model.py
 │   └── main.py
-
 ├── .dockerignore
-
 ├── .gitignore
-
 ├── .python-version
-
 ├── Dockerfile
-
 ├── pyproject.toml
-
 ├── README.md
-
 └── uv.lock
-
 ```
 
-
-
-\## Run Locally
-
-
+## Run Locally
 
 Install the locked dependencies:
 
-
-
 ```bash
-
 uv sync
-
 ```
-
-
 
 Start the development server:
 
-
-
 ```bash
-
 uv run fastapi dev app/main.py
-
 ```
-
-
 
 Open the interactive documentation:
 
-
-
 ```text
-
 http://127.0.0.1:8000/docs
-
 ```
 
+## API Endpoints
 
+- `GET /` returns basic API information.
 
-\## API Endpoints
+- `GET /health` checks whether the API is running.
 
+- `POST /generate` generates text with the bigram model.
 
+- `POST /embedding` returns a 300-dimensional spaCy word embedding.
 
-\- `GET /` returns basic API information.
-
-\- `GET /health` checks whether the API is running.
-
-\- `POST /generate` generates text with the bigram model.
-
-\- `POST /embedding` returns a 300-dimensional spaCy word embedding.
-
-
-
-\### Text Generation Request
-
-
+### Text Generation Request
 
 ```json
-
 {
-
-&#x20; "start\_word": "the",
-
-&#x20; "length": 10
-
+  "start_word": "the",
+  "length": 10
 }
-
 ```
 
-
-
-\### Word Embedding Request
-
-
+### Word Embedding Request
 
 ```json
-
 {
-
-&#x20; "word": "apple"
-
+  "word": "apple"
 }
-
 ```
 
-
-
-\## Run with Docker
-
-
+## Run with Docker
 
 Build the Docker image:
 
-
-
 ```bash
-
-docker build -t apan\_5560genai .
-
+docker build -t apan_5560genai .
 ```
-
-
 
 Run the container:
 
-
-
 ```bash
-
-docker run -p 8000:80 apan\_5560genai
-
+docker run -p 8000:80 apan_5560genai
 ```
-
-
 
 Then open:
 
-
-
 ```text
-
 http://127.0.0.1:8000/docs
-
 ```
-
-
 
 Press `Ctrl+C` in the terminal to stop the container.
 
